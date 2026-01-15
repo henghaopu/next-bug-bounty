@@ -1,21 +1,39 @@
 const initialTickets = [
 	{
 		id: '1',
-		title: 'Login issue',
-		content: 'Unable to login with correct credentials.',
-		status: 'open' as const,
+		title: 'Crash on profile photo upload',
+		content: 'Fresh bug filed after Sentry alert from production.',
+		status: 'new' as const,
 	},
 	{
 		id: '2',
-		title: 'Page not loading',
-		content: 'The dashboard page is not loading properly.',
-		status: 'in-progress' as const,
+		title: 'Payments API 500s',
+		content: 'Tracing logs under review to pinpoint failing hop.',
+		status: 'investigating' as const,
 	},
 	{
 		id: '3',
-		title: 'Feature request',
-		content: 'Add dark mode to the application.',
-		status: 'closed' as const,
+		title: 'Slow search autocomplete',
+		content: 'Engineers wiring caching layer to cut latency.',
+		status: 'fixing' as const,
+	},
+	{
+		id: '4',
+		title: 'Push tokens rejected by APNs',
+		content: 'Awaiting new certificate from security team before fix resumes.',
+		status: 'investigating' as const,
+	},
+	{
+		id: '5',
+		title: 'Rollback guard for billing',
+		content: 'Engineers implementing guard rails in the billing worker.',
+		status: 'fixing' as const,
+	},
+	{
+		id: '6',
+		title: 'Dark mode flicker',
+		content: 'Patched and verified in production.',
+		status: 'resolved' as const,
 	},
 ]
 

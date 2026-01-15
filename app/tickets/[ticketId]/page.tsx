@@ -1,3 +1,4 @@
+import { TicketStatusBadge } from '@/components/ticket-status'
 import initialTickets from '@/data'
 
 async function TicketDetailPage({ params }: PageProps<'/tickets/[ticketId]'>) {
@@ -14,7 +15,10 @@ async function TicketDetailPage({ params }: PageProps<'/tickets/[ticketId]'>) {
 			<div>
 				<h2 className="text-md font-semibold">{ticket.title}</h2>
 				<p>{ticket.content}</p>
-				<p className="text-sm text-gray-500">Status: {ticket.status}</p>
+				<div className="mt-2 flex items-center gap-x-2 text-sm text-gray-500">
+					<span>Status:</span>
+					<TicketStatusBadge status={ticket.status} />
+				</div>
 			</div>
 		</div>
 	)

@@ -1,51 +1,42 @@
 import Link from 'next/link'
+import { TicketStatusBadge } from '@/components/ticket-status'
 import initialTickets from '@/data'
 import { routes } from '@/routes'
 
-const statusIconMap = {
-	open: '🟢',
-	'in-progress': '⏳',
-	closed: '✅',
-} as const
-
-type TicketStatus = keyof typeof statusIconMap
-
-const isTicketStatus = (status: string): status is TicketStatus =>
-	status in statusIconMap
-
-const getStatusIcon = (status: string) =>
-	isTicketStatus(status) ? statusIconMap[status] : '❔'
-
 function TicketsPage() {
 	return (
-		<div>
-			<h1 className="text-lg">Tickets Page</h1>
+		<div className="flex-1 flex flex-col gap-y-8">
+			<div>
+				<h1 className="text-3xl font-bold tracking-tight">Tickets Page</h1>
+				<p className="text-sm">All Tickets</p>
+			</div>
 
-			<div className="flex gap-4 my-4">
-				{initialTickets.map((ticket) => {
-					const statusIcon = getStatusIcon(ticket.status)
-
-					return (
-						<div key={ticket.id} className="mb-4">
-							<h2 className="text-md font-semibold">{ticket.title}</h2>
-
-							<p className="text-sm text-gray-500">
-								Status:
-								<span className="ml-1 inline-flex items-center gap-1">
-									<span aria-hidden="true">{statusIcon}</span>
-									<span className="capitalize">{ticket.status}</span>
-								</span>
-							</p>
-
-							<Link
-								href={routes.ticketDetail(ticket.id)}
-								className="underline text-blue-600"
-							>
-								View Details
-							</Link>
+			<div className="flex-1 flex flex-col items-center gap-y-4 my-4 animate-fade-in-from-top">
+				{initialTickets.map((ticket) => (
+					<div
+						key={ticket.id}
+						className="border p-4 rounded w-full max-w-105 space-y-2"
+					>
+						<div className="flex items-start justify-between gap-x-3">
+							<div className="flex-1 min-w-0">
+								<h2 className="text-lg font-semibold truncate">
+									{ticket.title}
+								</h2>
+								<p className="text-sm text-gray-500 truncate">
+									{ticket.content}
+								</p>
+							</div>
+							<TicketStatusBadge status={ticket.status} className="shrink-0" />
 						</div>
-					)
-				})}
+
+						<Link
+							href={routes.ticketDetail(ticket.id)}
+							className="text-sm underline text-blue-600"
+						>
+							Details
+						</Link>
+					</div>
+				))}
 			</div>
 		</div>
 	)
