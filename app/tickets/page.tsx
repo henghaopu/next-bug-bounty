@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { TicketStatusBadge } from '@/components/ticket-status'
 import initialTickets from '@/data'
 import { routes } from '@/routes'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 
 function TicketsPage() {
 	return (
@@ -13,29 +14,23 @@ function TicketsPage() {
 
 			<div className="flex-1 flex flex-col items-center gap-y-4 my-4 animate-fade-in-from-top">
 				{initialTickets.map((ticket) => (
-					<div
-						key={ticket.id}
-						className="border p-4 rounded w-full max-w-105 space-y-2"
-					>
-						<div className="flex items-start justify-between gap-x-3">
-							<div className="flex-1 min-w-0">
-								<h2 className="text-lg font-semibold truncate">
-									{ticket.title}
-								</h2>
-								<p className="text-sm text-gray-500 truncate">
-									{ticket.content}
-								</p>
-							</div>
+					<Card key={ticket.id} className="w-full max-w-105">
+						<CardHeader className="flex items-center justify-between gap-x-3">
+							<h2 className="text-lg font-semibold truncate">{ticket.title}</h2>
 							<TicketStatusBadge status={ticket.status} className="shrink-0" />
-						</div>
-
-						<Link
-							href={routes.ticketDetail(ticket.id)}
-							className="text-sm underline text-blue-600"
-						>
-							Details
-						</Link>
-					</div>
+						</CardHeader>
+						<CardContent>
+							<p className="line-clamp-3 text-gray-500">{ticket.content}</p>
+						</CardContent>
+						<CardFooter>
+							<Link
+								href={routes.ticketDetail(ticket.id)}
+								className="text-sm underline text-blue-600"
+							>
+								Details
+							</Link>
+						</CardFooter>
+					</Card>
 				))}
 			</div>
 		</div>
